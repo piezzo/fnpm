@@ -1,0 +1,68 @@
+extends layout
+
+block content
+	h1= title
+	h1.
+		Express Bitcoin getpeerinfo
+		
+	script(type="text/javascript", src="http://d3js.org/d3.v3.min.js")
+	script(type="text/javascript", src="http://rawgit.com/benkeen/d3pie/0.1.6/d3pie/d3pie.min.js")
+	script(type="text/javascript", src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js")
+	
+	p I am connected to #{data.length} peers:
+	
+	ul
+		each peer, index in data
+			#mypie
+			
+			script(type="text/javascript").
+				var ct = #{peer.conntime} * 1000;
+				//console.log(ct);
+				var tconnected = moment(ct).fromNow();
+				var host = "#{peer.addr}";
+				//console.log(host.split(":",1));
+				var hostcolor = "#666666";
+				if (#{peer.inbound}) {
+					hostcolor = "#6699FF";
+				}
+				var pie = new d3pie("mypie", {
+				  header: {
+				    title: {
+				      //text: "peer #{index}, #{peer.inbound}",
+					  text: host.split(":",1),
+					  color: hostcolor,
+					  subtitle: {
+						  text: "ping!",
+						  },
+				    },
+				    location: "pie-center",
+					subtitlepadding: 50,
+				  },
+				  footer: {
+				  		text: "connected: " + tconnected,
+						location: "center"
+				  	},
+				  size: {
+				    canvasHeight: 300,
+				    canvasWidth: 350,  
+				    pieInnerRadius: "70%"
+				  },
+				  data: {
+				    sortOrder: "label-asc",
+				    content: [
+				      { label: "in: #{Math.round(peer.bytesrecv *100 / (1024*1024))/100} MB", value: #{peer.bytesrecv / (1024*1024)}, color: "#6699FF" },
+				      { label: "out: #{Math.round(peer.bytessent *100 / (1024*1024))/100} MB", value: #{peer.bytessent / (1024*1024)}, color: "#FF0066"}
+				    ]
+				  }
+				});
+			
+			//li= index + ': ' + 'addr: ' + peer.addr 
+			//ul 
+				li= 'subver: ' + peer.subver
+				li= 'version: ' + peer.version
+				li= 'inbound: ' + peer.inbound
+				li= 'banscore: ' + peer.banscore 
+				br
+
+	
+				

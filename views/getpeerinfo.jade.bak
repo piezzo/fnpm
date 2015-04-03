@@ -1,0 +1,53 @@
+extends layout
+
+block content
+	h1= title
+	h1.
+		Express Bitcoin getpeerinfo
+		
+	script(type="text/javascript", src="http://d3js.org/d3.v3.min.js")
+	script(type="text/javascript", src="http://rawgit.com/benkeen/d3pie/0.1.6/d3pie/d3pie.min.js")
+	
+	p I am connected to #{data.length} peers:
+	
+	ul
+		each peer, index in data
+			#mypie
+			
+			script(type="text/javascript").
+				var milliseconds = (new Date).getTime();
+				var pie = new d3pie("mypie", {
+				  header: {
+				    title: {
+				      text: "peer #{index}, #{peer.inbound}",
+				    },
+				    location: "pie-center"
+				  },
+				  footer: {
+				  		text: "in: #{peer.conntime.toString()}",
+						location: "center"
+				  	},
+				  size: {
+				    canvasHeight: 250,
+				    canvasWidth: 350,  
+				    pieInnerRadius: "70%"
+				  },
+				  data: {
+				    sortOrder: "label-asc",
+				    content: [
+				      { label: "in: #{Math.round(peer.bytesrecv *100 / (1024*1024))/100} MB", value: #{peer.bytesrecv / (1024*1024)}, color: "#6699FF" },
+				      { label: "out: #{Math.round(peer.bytessent *100 / (1024*1024))/100} MB", value: #{peer.bytessent / (1024*1024)}, color: "#FF0066"}
+				    ]
+				  }
+				});
+			
+			li= index + ': ' + 'addr: ' + peer.addr 
+			ul 
+				li= 'subver: ' + peer.subver
+				li= 'version: ' + peer.version
+				li= 'inbound: ' + peer.inbound
+				li= 'banscore: ' + peer.banscore 
+				br
+
+	
+				
