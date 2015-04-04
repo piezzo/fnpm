@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var prettyjson = require('prettyjson');
 var d3 = require('d3');
 //var d3pie = require('d3pie');
 
