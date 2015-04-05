@@ -10,7 +10,7 @@ var client = new bitcoin.Client({
   host: 'localhost',
   port: 8332,
   user: 'bitcoinrpc',
-  pass: '5sjUwkZD6fba1jaupe',
+  pass: '4CCzHzEdCS3k5DWiJN9fm8N6RPkDX5DGkdGXdZg8jwHz',
   timeout: 30000
 });
 
