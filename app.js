@@ -6,6 +6,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var bitcoin = require('bitcoin');
 
+//load btcd and config
+var btcd = require('btcd')('wss://rpcuser:ficken@localhost:8334/ws',
+                           __dirname + '/rpc.cert');
+//bitcoin core config
 var client = new bitcoin.Client({
   host: 'localhost',
   port: 8332,
