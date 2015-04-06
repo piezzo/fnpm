@@ -27,6 +27,14 @@ block content
 			if (#{peer.inbound}) {
 				hostcolor = "#6699FF";
 			}
+			
+			var textinbound;
+			if (#{peer.inbound}) {
+				textfooter = "inbound " + tconnected;
+				} else {textfooter = "outbound " + tconnected;
+					
+				}
+			
 			var pie = new d3pie("mypie", {
 			  header: {
 			    title: {
@@ -41,7 +49,7 @@ block content
 				subtitlepadding: 50,
 			  },
 			  footer: {
-			  		text: "connected: " + tconnected,
+			  		text: textfooter,
 					location: "center"
 			  	},
 			  size: {
