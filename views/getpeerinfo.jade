@@ -9,7 +9,8 @@ block content
 	script(type="text/javascript", src="http://rawgit.com/benkeen/d3pie/0.1.6/d3pie/d3pie.min.js")
 	script(type="text/javascript", src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js")
 	
-	p I am connected to #{data.length} peers.
+	p I am connected to 
+		b #{data.length} peers.
 	
 	script.
 		document.write("Statistics generated at " + (new Date()).toString() + ".");
@@ -30,9 +31,16 @@ block content
 			
 			var textinbound;
 			if (#{peer.inbound}) {
-				textfooter = "inbound " + tconnected;
-				} else {textfooter = "outbound " + tconnected;
-					
+					textfooter = "inbound " + tconnected;
+				} else {
+					textfooter = "outbound " + tconnected;
+				}
+			
+			var donutsize;
+			if (#{(peer.bytesrecv + peer.bytessent) / (1024*1024)} < 1) {
+					donutsize = "99%";
+				} else {
+					donutsize = "85%";
 				}
 			
 			var pie = new d3pie("mypie", {
@@ -56,7 +64,7 @@ block content
 			    canvasHeight: 300,
 			    canvasWidth: 350,  
 			   // pieInnerRadius: "#{peer.bytesrecv / (1024*1024)}"
-				pieInnerRadius: "85%"
+				pieInnerRadius: donutsize
 			  },
 			  data: {
 			    sortOrder: "label-asc",
