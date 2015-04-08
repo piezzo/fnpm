@@ -1,0 +1,13 @@
+{
+	"rpcConfig": {
+		"btcd": {
+			"user": "rpcuser",
+			"password": "ficken",
+			"certFile": "rpc.cert"
+			},
+		"bitcoind": {
+			"user": "rpcuser",
+			"password": "ficken"
+			}
+	}
+}

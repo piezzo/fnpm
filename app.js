@@ -4,17 +4,18 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var config = require('config');
+var rpcConfig = config.get('rpcConfig');
 var bitcoin = require('bitcoin');
-
 //load btcd and config
-var btcd = require('btcd')('wss://rpcuser:ficken@localhost:8334/ws',
+var btcd = require('btcd')('wss://' + rpcConfig.btcd.user + ':' + rpcConfig.btcd.password + '@localhost:8334/ws',
                            __dirname + '/rpc.cert');
 //bitcoin core config
 var client = new bitcoin.Client({
   host: 'localhost',
   port: 8332,
-  user: 'bitcoinrpc',
-  pass: '4CCzHzEdCS3k5DWiJN9fm8N6RPkDX5DGkdGXdZg8jwHz',
+  user: rpcConfig.bitcoind.user,
+  pass: rpcConfig.bitcoind.password,
   timeout: 30000
 });
 

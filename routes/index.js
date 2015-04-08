@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
-//var d3 = require('d3');
-//var d3pie = require('d3pie');
+var config = require('config');
+var rpcConfig = config.get('rpcConfig');
 
 //load btcd and config
-var btcd = require('btcd')('wss://rpcuser:ficken@localhost:8334/ws',
+var btcd = require('btcd')('wss://' + rpcConfig.btcd.user + ':' + rpcConfig.btcd.password + '@localhost:8334/ws',
                            __dirname + '/rpc.cert');
 
 
