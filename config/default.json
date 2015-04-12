@@ -1,5 +1,5 @@
 {
-	"serverType": "sampledata",	// valid values are: "sampleData", "btcd" and "bitcoind"
+	"serverType": "bitcoind",	// valid values are: "sampledata", "btcd" and "bitcoind"
 	"rpcConfig": {
 		"btcd": {
 			"user": "rpcuser",
