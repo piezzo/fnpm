@@ -10,13 +10,10 @@ block content
 	script(type="text/javascript", src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js")
 	
 	script(type="text/javascript").
-		var connectedSince = moment(#{nettotals.timemillis}).fromNow().toString();
+		var connectedSince = moment(#{nettotals.timemillis}).toString();
 		document.write(
-			"I am connected to <strong> " + #{data.length} + " peers </strong> and have sent <strong>" + Math.round(#{nettotals.totalbytessent} *100 / (1024*1024))/100 + " MB</strong> and received <strong>" + Math.round(#{nettotals.totalbytesrecv} *100 / (1024*1024))/100 + " MB</strong> since " + connectedSince.toString() + ".");
+			"I am connected to <strong> " + #{data.length} + " peers </strong> and have sent <strong>" + Math.round(#{nettotals.totalbytessent} *100 / (1024*1024))/100 + " MB</strong> and received <strong>" + Math.round(#{nettotals.totalbytesrecv} *100 / (1024*1024))/100 + " MB</strong>. Data collected at: " + connectedSince.toString() + ".");
 
-	br
-	script.
-			document.write("Statistics generated at " + (new Date()).toString() + ".");
 	
 	each peer, index in data
 		#mypie

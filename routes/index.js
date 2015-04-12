@@ -37,45 +37,35 @@ btcd.getnettotals(function(err, hash){
 
 
 router.get('/getpeerinfo', function(req, res, next) {
-	var peerinfo = config.rpcConfig.sampleData.getpeerinfo;
 	switch (serverType) {
 		case 'btcd':
 			btcd.getpeerinfo(function(err, info, resHeaders) {
 				if (err) return console.log(err);
-				res.render('getpeerinfo', {
-					"data": info,
-					"colors": colors,
-					"nettotals": nettotals
+				btcd.getnettotals(function(err, nettotals, resHeaders) {
+					if (err) return console.log(err);
+					res.render('getpeerinfo', {
+						"data": info,
+						"colors": colors,
+						"nettotals": nettotals
+					});
 				});
 			});
-			// btcd.getnettotals(function(err, nettotals, resHeaders) {
-			// 	if (err) return console.log(err);
-			// });
 			break;
 		case 'bitcoind':
 			req.client.cmd('getpeerinfo', function(err, info, resHeaders) {
 				if (err) return console.log(err);
-				// console.log(info);
-				// console.log(colors);
-				// console.log(nettotals);
-				// res.render('getpeerinfo', {
-// 					"data": info,
-// 					"colors": colors,
-// 					"nettotals": nettotals
-// 				});
-peerinfo = info;
-			});
-			req.client.cmd('getnettotals', function(err, nettotals, resHeaders) {
-				if (err) return console.log(err);
-				console.log(peerinfo);
-				console.log(colors);
-				console.log(nettotals);
-				res.render('getpeerinfo', {
-					"data": peerinfo,
-					"colors": colors,
-					"nettotals": nettotals
+				req.client.cmd('getnettotals', function(err, nettotals, resHeaders) {
+					if (err) return console.log(err);
+					// console.log(info);
+					// console.log(colors);
+					// console.log(nettotals);
+					res.render('getpeerinfo', {
+						"data": info,
+						"colors": colors,
+						"nettotals": nettotals
+					});
 				});
-			});
+						});
 			// var nettotals = config.rpcConfig.sampleData.getnettotals;
 
 			break;
@@ -85,7 +75,6 @@ peerinfo = info;
 				var info = config.rpcConfig.sampleData.getpeerinfo;
 				var nettotals = config.rpcConfig.sampleData.getnettotals;
 			};
-	console.log("serverType: " + serverType + ", info: " + info);
 	res.render('getpeerinfo', {
 		"data": info,
 		"colors": colors,
