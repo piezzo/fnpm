@@ -25,50 +25,39 @@ btcd.getnettotals(function(err, hash){
 	res.render('index', { title: 'Express' })
 });
 
-router.get('/getinfo', function(req, res, next) {
-	req.client.cmd('getinfo', function(err, info, resHeaders){
-	  if (err) return console.log(err);
-	  var result = JSON.stringify(info).replace(/</g, '&lt;').replace(/>/g, '&gt;');
-	  res.render('getinfo', {"data" : info
-	  });
-//	  console.log(info);
-  });
- // res.render('getinfo', { title: 'Express getinfo' });
-});
+// router.get('/getinfo', function(req, res, next) {
+// 	req.client.cmd('getinfo', function(err, info, resHeaders){
+// 	  if (err) return console.log(err);
+// 	  var result = JSON.stringify(info).replace(/</g, '&lt;').replace(/>/g, '&gt;');
+// 	  res.render('getinfo', {"data" : info
+// 	  });
+//   });
+// });
 
 
 router.get('/getpeerinfo', function(req, res, next) {
-	switch (serverType){
-		case 'btcd': {
-		btcd.getpeerinfo(function(err, info, resHeaders){
-		  if (err) return console.log(err);
-	//	  console.log(info);
-	//	  var result = JSON.stringify(info).replace(/</g, '&lt;').replace(/>/g, '&gt;');
-		  console.log('btcd: ' + info);
-		  res.render('getpeerinfo', {"data" : info
-		  });
+	switch (serverType) {
+		case 'btcd':
+			btcd.getpeerinfo(function(err, info, resHeaders) {
+				if (err) return console.log(err);
+			});
+			break;
+		case 'bitcoind':
+			req.client.cmd('getpeerinfo', function(err, info, resHeaders) {
+				if (err) return console.log(err);
+			});
+			break;
+		case 'sampleData':
+			{
+				var info = config.rpcConfig.sampleData.getpeerinfo;
+			};
+	console.log("serverType: " + serverType + "info: " + info);
+	res.render('getpeerinfo', {
+		"data": info
+	});
 	//	break;
-})};
-
-	case 'bitcoind': {
-		req.client.cmd('getpeerinfo', function(err, info, resHeaders){
-		  if (err) return console.log(err);
-	//	  console.log(info);
-	//	  var result = JSON.stringify(info).replace(/</g, '&lt;').replace(/>/g, '&gt;');
-		  console.log('bitcoind: ' + info);
-		  res.render('getpeerinfo', {"data" : info
-		  });
-	  })};
-	//	break;
-	case 'sampleData': {
-		var info = config.rpcConfig.sampleData.getpeerinfo;
-		console.log('bitcoind: ' + info);
-		res.render('getpeerinfo', {"data" : info
-		})};
-	
 	}
-
- // res.render('getinfo', { title: 'Express getinfo' });
 });
+
 
 module.exports = router;
