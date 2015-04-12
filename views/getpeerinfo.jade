@@ -24,9 +24,9 @@ block content
 			var tconnected = moment(ct).fromNow();
 			var host = "#{peer.addr}";
 			//console.log(host.split(":",1));
-			var hostcolor = "#666666";
+			var hostcolor = "#00FF00";
 			if (#{peer.inbound}) {
-				hostcolor = "#6699FF";
+				hostcolor = "#9900FF";
 			}
 			
 			var textinbound;
@@ -69,8 +69,8 @@ block content
 			  data: {
 			    sortOrder: "label-asc",
 			    content: [
-			      { label: "in: #{Math.round(peer.bytesrecv *100 / (1024*1024))/100} MB", value: #{peer.bytesrecv / (1024*1024)}, color: "#6699FF" },
-			      { label: "out: #{Math.round(peer.bytessent *100 / (1024*1024))/100} MB", value: #{peer.bytessent / (1024*1024)}, color: "#FF0066"}
+			      { label: "in: #{Math.round(peer.bytesrecv *100 / (1024*1024))/100} MB", value: #{peer.bytesrecv / (1024*1024)}, color: "#9900FF" },
+			      { label: "out: #{Math.round(peer.bytessent *100 / (1024*1024))/100} MB", value: #{peer.bytessent / (1024*1024)}, color: "#00FF00"}
 			    ]
 			  }
 			});				

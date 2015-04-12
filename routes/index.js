@@ -47,7 +47,7 @@ router.get('/getpeerinfo', function(req, res, next) {
 				if (err) return console.log(err);
 			});
 			break;
-		case 'sampleData':
+		case 'sampledata':
 			{
 				var info = config.rpcConfig.sampleData.getpeerinfo;
 			};
