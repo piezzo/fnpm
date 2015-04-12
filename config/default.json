@@ -7,8 +7,8 @@
 			"certFile": "rpc.cert"
 			},
 		"bitcoind": {
-			"user": "rpcuser",
-			"password": "ficken"
+			"user": "bitcoinrpc",
+			"password": "4CCzHzEdCS3k5DWiJN9fm8N6RPkDX5DGkdGXdZg8jwHz"
 			},
 
 			// this is for testing...
