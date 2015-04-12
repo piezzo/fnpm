@@ -23,6 +23,13 @@ error: {"code":-28,"message":"Rescanning..."}
     "errors" : ""
 }
 
+//getnettotals
+{
+    "totalbytesrecv" : 20923333,
+    "totalbytessent" : 9351,
+    "timemillis" : 1428852695186
+}
+
 // getpeerinfo
 [
     {

@@ -42,20 +42,28 @@ router.get('/getpeerinfo', function(req, res, next) {
 			btcd.getpeerinfo(function(err, info, resHeaders) {
 				if (err) return console.log(err);
 			});
+			btcd.getnettotals(function(err, nettotals, resHeaders) {
+				if (err) return console.log(err);
+			});
 			break;
 		case 'bitcoind':
 			req.client.cmd('getpeerinfo', function(err, info, resHeaders) {
+				if (err) return console.log(err);
+			});
+			req.client.cmd('getnettotals', function(err, nettotals, resHeaders) {
 				if (err) return console.log(err);
 			});
 			break;
 		case 'sampledata':
 			{
 				var info = config.rpcConfig.sampleData.getpeerinfo;
+				var nettotals = config.rpcConfig.sampleData.getnettotals;
 			};
 	console.log("serverType: " + serverType + "info: " + info);
 	res.render('getpeerinfo', {
 		"data": info,
-		"colors": colors
+		"colors": colors,
+		"nettotals": nettotals
 	});
 	//	break;
 	}
