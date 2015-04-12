@@ -3,6 +3,7 @@ var router = express.Router();
 var config = require('config');
 var serverType = config.get('serverType');
 var rpcConfig = config.get('rpcConfig');
+var colors = config.get('colors');
 
 //load btcd and config
 var btcd = require('btcd')('wss://' + rpcConfig.btcd.user + ':' + rpcConfig.btcd.password + '@localhost:8334/ws',
@@ -53,7 +54,8 @@ router.get('/getpeerinfo', function(req, res, next) {
 			};
 	console.log("serverType: " + serverType + "info: " + info);
 	res.render('getpeerinfo', {
-		"data": info
+		"data": info,
+		"colors": colors
 	});
 	//	break;
 	}
