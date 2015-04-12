@@ -37,6 +37,7 @@ btcd.getnettotals(function(err, hash){
 
 
 router.get('/getpeerinfo', function(req, res, next) {
+	var peerinfo = config.rpcConfig.sampleData.getpeerinfo;
 	switch (serverType) {
 		case 'btcd':
 			btcd.getpeerinfo(function(err, info, resHeaders) {
@@ -54,25 +55,26 @@ router.get('/getpeerinfo', function(req, res, next) {
 		case 'bitcoind':
 			req.client.cmd('getpeerinfo', function(err, info, resHeaders) {
 				if (err) return console.log(err);
-				console.log(info);
+				// console.log(info);
+				// console.log(colors);
+				// console.log(nettotals);
+				// res.render('getpeerinfo', {
+// 					"data": info,
+// 					"colors": colors,
+// 					"nettotals": nettotals
+// 				});
+peerinfo = info;
+			});
+			req.client.cmd('getnettotals', function(err, nettotals, resHeaders) {
+				if (err) return console.log(err);
+				console.log(peerinfo);
 				console.log(colors);
 				console.log(nettotals);
 				res.render('getpeerinfo', {
-					"data": info,
+					"data": peerinfo,
 					"colors": colors,
 					"nettotals": nettotals
 				});
-			});
-			// req.client.cmd('getnettotals', function(err, nettotals, resHeaders) {
-			// 	if (err) return console.log(err);
-			// 	console.log(info);
-			// 	console.log(colors);
-			// 	console.log(nettotals);
-				// res.render('getpeerinfo', {
-				// 	"data": info,
-				// 	"colors": colors,
-				// 	"nettotals": nettotals
-				// });
 			});
 			// var nettotals = config.rpcConfig.sampleData.getnettotals;
 
