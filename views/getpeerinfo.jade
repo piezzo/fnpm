@@ -12,7 +12,7 @@ block content
 	script(type="text/javascript").
 		var connectedSince = moment(#{nettotals.timemillis}).toString();
 		document.write(
-			"I am connected to <strong> " + #{data.length} + " peers </strong> and have sent <strong>" + Math.round(#{nettotals.totalbytessent} *100 / (1024*1024))/100 + " MB</strong> and received <strong>" + Math.round(#{nettotals.totalbytesrecv} *100 / (1024*1024))/100 + " MB</strong>. Data collected at: " + connectedSince.toString() + ".");
+			"Currently connected to <strong> " + #{data.length} + " peers </strong> and have sent <strong>" + Math.round(#{nettotals.totalbytessent} *100 / (1024*1024*1024))/100 + " GB</strong> and received <strong>" + Math.round(#{nettotals.totalbytesrecv} *100 / (1024*1024*1024))/100 + " GB</strong>. Data collected: <strong>" + moment(connectedSince).format("dddd, MMMM Do YYYY, h:mm") + "</strong>.");
 
 	
 	each peer, index in data
