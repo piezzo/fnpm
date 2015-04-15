@@ -20,7 +20,7 @@ router.get('/getpeerinfo', function(req, res, next) {
 					if (err) return console.log(err);
 					var maxTransferred = 0;
 					for (var i = 0; i < info.length; i++){
-						maxTransferred = Math.max(maxTransferred, info[i].bytessent);
+						maxTransferred = Math.max(maxTransferred, (info[i].bytessent + info[i].bytesrecv));
 					};
 					res.render('getpeerinfo', {
 						"data": info,
@@ -38,7 +38,7 @@ router.get('/getpeerinfo', function(req, res, next) {
 					if (err) return console.log(err);
 					var maxTransferred = 0;
 					for (var i = 0; i < info.length; i++){
-						maxTransferred = Math.max(maxTransferred, info[i].bytessent);
+						maxTransferred = Math.max(maxTransferred, (info[i].bytessent + info[i].bytesrecv));
 					};
 					res.render('getpeerinfo', {
 						"data": info,
@@ -58,7 +58,7 @@ router.get('/getpeerinfo', function(req, res, next) {
 				var nettotals = config.rpcConfig.sampleData.getnettotals;
 				var maxTransferred = 0;
 				for (var i = 0; i < info.length; i++){
-					maxTransferred = Math.max(maxTransferred, info[i].bytessent);
+					maxTransferred = Math.max(maxTransferred, (info[i].bytessent + info[i].bytesrecv));
 				};
 			};
 	res.render('getpeerinfo', {

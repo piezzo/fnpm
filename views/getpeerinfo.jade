@@ -25,8 +25,8 @@ block content
 			var host = "#{peer.addr}";
 			//console.log(host.split(":",1));
 			var hostcolor = "#{colors.out}";
-			var relTraffic = #{(peer.bytesrecv + peer.bytessent)} / #{maxTransferred / 2};
-
+			var relTraffic = #{(peer.bytesrecv + peer.bytessent)} / #{maxTransferred};
+			console.log(relTraffic);
 			if (#{peer.inbound}) {
 				hostcolor = "#{colors.in}";
 			}
@@ -39,7 +39,7 @@ block content
 				}
 			
 			var donutsize;
-			donutsize = (- Math.round(relTraffic * 100) + 100) + "%";
+			donutsize = (- Math.round(Math.min(0.25, relTraffic) * 100) + 100) + "%";
 			
 			var pie = new d3pie("mypie", {
 			  header: {
