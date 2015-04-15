@@ -7,9 +7,10 @@ var bodyParser = require('body-parser');
 var config = require('config');
 var rpcConfig = config.get('rpcConfig');
 var bitcoin = require('bitcoin');
+
 //load btcd and config
 var btcd = require('btcd')('wss://' + rpcConfig.btcd.user + ':' + rpcConfig.btcd.password + '@localhost:8334/ws',
-                           __dirname + '/rpc.cert');
+                           rpcConfig.btcd.certFile);
 //bitcoin core config
 var client = new bitcoin.Client({
   host: 'localhost',

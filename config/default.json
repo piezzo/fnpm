@@ -8,7 +8,7 @@
 		"btcd": {
 			"user": "rpcuser",
 			"password": "ficken",
-			"certFile": "/home/bitcoin/.btcd/rpc.cert" // Adapt to your needs and make sure this is readable to nodejs instance
+			"certFile": "/home/patrick/.btcd/rpc.cert" // Adapt to your needs (relative paths dont work...) and make sure this is readable to nodejs instance
 			},
 		"bitcoind": {
 			"user": "bitcoinrpc",

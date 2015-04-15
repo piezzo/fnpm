@@ -13,9 +13,9 @@ block content
 		var connectedSince = moment(#{nettotals.timemillis}).toString();
 		document.write(
 			"Currently connected to <strong> " + #{data.length} + " peers </strong> and have sent <strong>" + Math.round(#{nettotals.totalbytessent} *100 / (1024*1024*1024))/100 + " GB</strong> and received <strong>" + Math.round(#{nettotals.totalbytesrecv} *100 / (1024*1024*1024))/100 + " GB</strong>. Data collected: <strong>" + moment(connectedSince).format("dddd, MMMM Do YYYY, h:mm") + "</strong>.");
-
 	
 	each peer, index in data
+
 		#mypie
 		
 		script(type="text/javascript").
@@ -25,6 +25,8 @@ block content
 			var host = "#{peer.addr}";
 			//console.log(host.split(":",1));
 			var hostcolor = "#{colors.out}";
+			var relTraffic = #{(peer.bytesrecv + peer.bytessent)} / #{maxTransferred / 2};
+
 			if (#{peer.inbound}) {
 				hostcolor = "#{colors.in}";
 			}
@@ -37,13 +39,7 @@ block content
 				}
 			
 			var donutsize;
-			if (#{(peer.bytesrecv + peer.bytessent) / (1024*1024)} < 1) {
-					donutsize = "99%";
-				} else {
-					donutsize = "85%";
-				}
-			
-				console.log();
+			donutsize = (- Math.round(relTraffic * 100) + 100) + "%";
 			
 			var pie = new d3pie("mypie", {
 			  header: {
