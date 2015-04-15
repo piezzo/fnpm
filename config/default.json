@@ -1,17 +1,21 @@
 {
-	"serverType": "bitcoind",	// valid values are: "sampledata", "btcd" and "bitcoind"
+	// This determines, which bitcoin-implementation is running. 
+	// Valid values for serverType are: "sampledata", "btcd" and "bitcoind"
+	// You also have to provide your rpc-credentials. These are usually stored a location like in .bitcoin/bitcoin.conf
+	// You only have to provide credentials for your Server. "sampledata" does not need any credentials.
+	"serverType": "bitcoind",
 	"rpcConfig": {
 		"btcd": {
 			"user": "rpcuser",
 			"password": "ficken",
-			"certFile": "rpc.cert"
+			"certFile": "/home/bitcoin/.btcd/rpc.cert" // Adapt to your needs and make sure this is readable to nodejs instance
 			},
 		"bitcoind": {
 			"user": "bitcoinrpc",
 			"password": "4CCzHzEdCS3k5DWiJN9fm8N6RPkDX5DGkdGXdZg8jwHz"
 			},
 
-			// this is for testing...
+			// This is for testing offline, nothing more to configure below...
 		"sampleData": {
 			"getinfo": {
 			    "version" : 100000,
