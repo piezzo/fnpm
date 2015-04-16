@@ -22,7 +22,7 @@ block content
 			var ct = #{peer.conntime} * 1000;
 			//console.log(ct);
 			var tconnected = moment(ct).fromNow();
-			var host = "#{peer.addr}";
+			var host = "#{peer.subver}";
 			//console.log(host.split(":",1));
 			var hostcolor = "#{colors.out}";
 			var relTraffic = #{(peer.bytesrecv + peer.bytessent)} / #{maxTransferred};
@@ -45,7 +45,8 @@ block content
 			  header: {
 			    title: {
 			      //text: "peer #{index}, #{peer.inbound}",
-				  text: host.split(":",1),
+				  //text: host.split(":",1),
+				  text: host,
 				  color: hostcolor,
 				  subtitle: {
 					  text: "ping!",
