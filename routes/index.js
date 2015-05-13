@@ -8,7 +8,7 @@ var colors = config.get('colors');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	res.render('index', { title: 'Express' })
+	res.render('index', { title: 'Express' });
 });
 
 router.get('/getpeerinfo', function(req, res, next) {

@@ -1,9 +1,9 @@
 {
-	// This determines, which bitcoin-implementation is running. 
+	// This determines, which bitcoin-implementation is running.
 	// Valid values for serverType are: "sampledata", "btcd" and "bitcoind"
 	// You also have to provide your rpc-credentials. These are usually stored a location like in .bitcoin/bitcoin.conf
 	// You only have to provide credentials for your Server. "sampledata" does not need any credentials.
-	"serverType": "bitcoind",
+	"serverType": "sampledata",
 	"rpcConfig": {
 		"btcd": {
 			"user": "rpcuser",

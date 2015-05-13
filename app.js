@@ -5,20 +5,24 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var config = require('config');
+var serverType = config.get('serverType');
 var rpcConfig = config.get('rpcConfig');
 var bitcoin = require('bitcoin');
 
 //load btcd and config
-var btcd = require('btcd')('wss://' + rpcConfig.btcd.user + ':' + rpcConfig.btcd.password + '@localhost:8334/ws',
-                           rpcConfig.btcd.certFile);
+if (serverType == 'btcd') {
+var btcd = require('btcd')('wss://' + rpcConfig.btcd.user + ':' + rpcConfig.btcd.password + '@localhost:8334/ws', rpcConfig.btcd.certFile);
+}
 //bitcoin core config
-var client = new bitcoin.Client({
-  host: 'localhost',
-  port: 8332,
-  user: rpcConfig.bitcoind.user,
-  pass: rpcConfig.bitcoind.password,
-  timeout: 30000
-});
+if (serverType == 'bitcoind') {
+  var client = new bitcoin.Client({
+    host: 'localhost',
+    port: 8332,
+    user: rpcConfig.bitcoind.user,
+    pass: rpcConfig.bitcoind.password,
+    timeout: 30000
+  });
+}
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
