@@ -15,6 +15,5 @@ Assuming you already have nodejs installed (if not, get it from https://nodejs.o
     $ npm install
     $ npm start
     
-If you connect to http://localhost:3000/getpeerinfo you should see a nice visualization of the cli-command getpeerinfo and see something like this:
 
 ![fnpm screenshot](https://raw.githubusercontent.com/piezzo/fnpm/master/fnpm_screenshot.png "screenshot")
